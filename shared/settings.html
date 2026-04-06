@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+  <title>Jira Links — Settings</title>
+  <style>
+    :root {
+      --jira-blue: #0052CC;
+      --jira-blue-dark: #0747A6;
+      --jira-blue-light: #DEEBFF;
+      --jira-blue-lighter: #E9F2FF;
+      --jira-green: #36B37E;
+      --jira-text: #172B4D;
+      --jira-text-subtle: #6B778C;
+      --jira-border: #DFE1E6;
+      --jira-bg: #FAFBFC;
+      --jira-white: #FFFFFF;
+      --jira-red: #DE350B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--jira-bg);
+      color: var(--jira-text);
+      min-width: 480px;
+      padding: 0;
+    }
+
+    .header {
+      background: var(--jira-blue);
+      color: #fff;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header svg {
+      flex-shrink: 0;
+    }
+
+    .header h1 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .header p {
+      font-size: 13px;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+
+    .container {
+      padding: 24px;
+      max-width: 600px;
+    }
+
+    .section {
+      background: var(--jira-white);
+      border: 1px solid var(--jira-border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--jira-text);
+      margin-bottom: 4px;
+    }
+
+    .section-desc {
+      font-size: 12px;
+      color: var(--jira-text-subtle);
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--jira-text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px 12px;
+      border: 2px solid var(--jira-border);
+      border-radius: 4px;
+      font-size: 14px;
+      color: var(--jira-text);
+      transition: border-color 0.15s;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--jira-blue);
+      background: var(--jira-blue-lighter);
+    }
+
+    input[type="text"]::placeholder {
+      color: var(--jira-text-subtle);
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toggle {
+      position: relative;
+      width: 40px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: var(--jira-border);
+      border-radius: 22px;
+      transition: 0.2s;
+    }
+
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+
+    .toggle input:checked + .toggle-slider {
+      background: var(--jira-blue);
+    }
+
+    .toggle input:checked + .toggle-slider::before {
+      transform: translateX(18px);
+    }
+
+    .whitelist-area {
+      width: 100%;
+      min-height: 120px;
+      padding: 8px 12px;
+      border: 2px solid var(--jira-border);
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
+      color: var(--jira-text);
+      resize: vertical;
+      outline: none;
+      line-height: 1.6;
+    }
+
+    .whitelist-area:focus {
+      border-color: var(--jira-blue);
+      background: var(--jira-blue-lighter);
+    }
+
+    .hint {
+      font-size: 11px;
+      color: var(--jira-text-subtle);
+      margin-top: 6px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 8px 20px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--jira-blue);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--jira-blue-dark);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--jira-text-subtle);
+      border: 1px solid var(--jira-border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--jira-blue-light);
+      color: var(--jira-text);
+    }
+
+    .status {
+      font-size: 13px;
+      color: var(--jira-green);
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.2s;
+      margin-left: 8px;
+    }
+
+    .status.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <rect width="32" height="32" rx="6" fill="#fff" fill-opacity="0.15"/>
+      <path d="M22.8 9.2H16.6L10.7 15.1c-.4.4-.4 1 0 1.4l4.8 4.8c.4.4 1 .4 1.4 0l6.5-6.5c.6-.6.6-1.5 0-2.1L22.8 9.2z" fill="#fff" fill-opacity="0.9"/>
+      <path d="M15.3 11.7L11.8 15.2c-.2.2-.2.5 0 .7l3.5 3.5c.2.2.5.2.7 0l3.5-3.5c.2-.2.2-.5 0-.7l-3.5-3.5c-.2-.2-.5-.2-.7 0z" fill="#fff"/>
+    </svg>
+    <div>
+      <h1>Jira Links</h1>
+      <p>Hover over ticket IDs to get quick Jira links</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <div class="toggle-row">
+        <div>
+          <div class="section-title">Extension Enabled</div>
+          <div class="section-desc">Toggle ticket detection on/off</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="enabled" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Jira Instance</div>
+      <div class="section-desc">Your Atlassian subdomain used to build ticket URLs</div>
+      <label for="subdomain">Subdomain</label>
+      <input type="text" id="subdomain" placeholder="mycompany (from mycompany.atlassian.net)">
+    </div>
+
+    <div class="section">
+      <div class="section-title">Allowed Sites</div>
+      <div class="section-desc">Domains where ticket detection is active — one per line</div>
+      <label for="whitelist">Domain Whitelist</label>
+      <textarea class="whitelist-area" id="whitelist"></textarea>
+      <div class="hint">Enter bare domains like github.com — subdomains matched automatically</div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="save">Save Settings</button>
+      <button class="btn btn-secondary" id="reset">Reset Defaults</button>
+      <span class="status" id="status">Saved!</span>
+    </div>
+  </div>
+
+  <script src="constants.js"></script>
+  <script src="storage.js"></script>
+  <script src="settings.js"></script>
+</body>
+</html>
