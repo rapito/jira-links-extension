@@ -1,19 +1,20 @@
 # Jira Links
 
-Browser extension that detects Jira ticket IDs on web pages and shows a hover popup with a direct link to your Jira instance. No DOM modification — original page content stays intact.
+Browser extension that detects Jira ticket IDs on web pages and shows a hover popup with a direct link to your Jira instance. 
 
 Works on Chrome, Firefox, and Edge.
 
 ![Jira Blue](https://img.shields.io/badge/Jira-0052CC?style=flat&logo=jira&logoColor=white)
 
+<img width="394" height="79" alt="image" src="https://github.com/user-attachments/assets/d473af00-3031-4191-8496-644b6071e76b" />
+
+
 ## Features
 
-- **Hover Detection** — hover over any ticket ID (e.g. `GP-123`, `PROJ-4567`) to get a clickable Jira link
-- **Non-Invasive** — floating popup only, page content is never modified
-- **Domain Whitelist** — only activates on configured sites (GitHub, GitLab, Bitbucket, etc. by default)
-- **Cross-Browser** — single shared codebase, works on Chrome, Firefox, and Edge
-- **Settings Page** — configure your Jira subdomain and allowed sites with a clean Jira-themed UI
-- **Zero Dependencies** — plain JavaScript, no build tools required beyond a shell script
+- **Hover Detection** hover over any ticket ID (e.g. `GP-123`, `PROJ-4567`) to get a clickable Jira link
+- **Domain Whitelist** only activates on configured sites (GitHub, GitLab, Bitbucket, etc. by default)
+- **Settings Page** configure your Jira subdomain and allowed sites with a clean Jira-themed UI
+- **Zero Dependencies** plain JavaScript, no build tools required beyond a shell script
 
 ## Installation
 
@@ -44,8 +45,8 @@ Works on Chrome, Firefox, and Edge.
 ## Setup
 
 1. After installing, right-click the extension icon and select **Options** (or go to the extension's settings)
-2. Enter your Jira **subdomain** — just the prefix, e.g. `mycompany` for `mycompany.atlassian.net`
-3. Review the **domain whitelist** — add or remove sites where ticket detection should be active
+2. Enter your Jira **subdomain**.
+3. Review the **domain whitelist** add or remove sites where ticket detection should be active
 4. Click **Save Settings**
 
 ## Default Whitelisted Sites
@@ -73,22 +74,6 @@ Detection uses `document.caretRangeFromPoint` (Chrome/Edge) and `caretPositionFr
 ```
 
 Copies shared source files and icons into each browser's folder. Run after any edit to files in `shared/`.
-
-## Project Structure
-
-```
-shared/          Shared source — all logic lives here
-  constants.js   Ticket regex, default whitelist
-  storage.js     Cross-browser storage abstraction
-  content.js     Content script — hover detection + popup
-  settings.html  Options page (Jira-themed)
-  settings.js    Options page logic
-chrome/          Chrome extension (Manifest V3)
-firefox/         Firefox extension (Manifest V2)
-edge/            Edge extension (Manifest V3)
-icons/           Extension icons
-build.sh         Copies shared code into browser folders
-```
 
 ## License
 
