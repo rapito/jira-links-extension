@@ -4,10 +4,7 @@ Browser extension that detects Jira ticket IDs on web pages and shows a hover po
 
 Works on Chrome, Firefox, and Edge.
 
-![Jira Blue](https://img.shields.io/badge/Jira-0052CC?style=flat&logo=jira&logoColor=white)
-
 <img width="394" height="79" alt="image" src="https://github.com/user-attachments/assets/d473af00-3031-4191-8496-644b6071e76b" />
-
 
 ## Features
 
