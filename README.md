@@ -46,24 +46,6 @@ Works on Chrome, Firefox, and Edge.
 3. Review the **domain whitelist** add or remove sites where ticket detection should be active
 4. Click **Save Settings**
 
-## Default Whitelisted Sites
-
-- github.com
-- gitlab.com
-- bitbucket.org
-- dev.azure.com
-- stackoverflow.com
-- slack.com
-- notion.so
-- confluence.atlassian.net
-- linear.app
-
-## How It Works
-
-Content script listens for mouse movement on whitelisted pages. When cursor hovers over text matching the Jira ticket pattern (`[A-Z][A-Z0-9]+-\d+`), a popup appears above the cursor with a direct link to `{subdomain}.atlassian.net/browse/{ticket}`.
-
-Detection uses `document.caretRangeFromPoint` (Chrome/Edge) and `caretPositionFromPoint` (Firefox) to identify the exact text under the cursor without scanning or modifying the DOM.
-
 ## Building
 
 ```sh
